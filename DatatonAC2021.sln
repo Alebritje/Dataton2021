@@ -3,13 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatatonWASM.Server", "DatatonWASM\Server\DatatonWASM.Server.csproj", "{2B1A56B8-19CF-40CC-802D-DFDDA5B541A1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatatonWASM.Client", "DatatonWASM\Client\DatatonWASM.Client.csproj", "{C603E8E2-BACC-4C62-AC87-67BB7C5383F9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatatonWASM.Shared", "DatatonWASM\Shared\DatatonWASM.Shared.csproj", "{7365A35E-2D6B-4D4E-86BD-D384F7BAEA91}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatatonAPI", "DatatonAPI\DatatonAPI.csproj", "{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatatonAPI", "DatatonAPI\DatatonAPI.csproj", "{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,18 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2B1A56B8-19CF-40CC-802D-DFDDA5B541A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B1A56B8-19CF-40CC-802D-DFDDA5B541A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B1A56B8-19CF-40CC-802D-DFDDA5B541A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B1A56B8-19CF-40CC-802D-DFDDA5B541A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C603E8E2-BACC-4C62-AC87-67BB7C5383F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C603E8E2-BACC-4C62-AC87-67BB7C5383F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C603E8E2-BACC-4C62-AC87-67BB7C5383F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C603E8E2-BACC-4C62-AC87-67BB7C5383F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7365A35E-2D6B-4D4E-86BD-D384F7BAEA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7365A35E-2D6B-4D4E-86BD-D384F7BAEA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7365A35E-2D6B-4D4E-86BD-D384F7BAEA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7365A35E-2D6B-4D4E-86BD-D384F7BAEA91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU

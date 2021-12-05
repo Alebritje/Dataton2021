@@ -30,7 +30,7 @@ namespace DatatonAPI.Repository
                 var response = await _container.ReadItemAsync<Declaracion>(id, new PartitionKey(id));
                 return response.Resource;
             }
-            catch (CosmosException) //For handling item not found and other exceptions
+            catch (CosmosException) 
             {
                 return null;
             }
