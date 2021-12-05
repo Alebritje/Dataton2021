@@ -1,0 +1,273 @@
+﻿@page "/verificacion"
+
+@inject IRepository repository
+@inject NavigationManager navigationManager
+@inject HttpClient http
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Linq
+
+<MudGrid>
+    <MudItem xs=12 Style="text-align:center">
+        <MudText Typo=Typo.h3 Color="Color.Primary">Sistema de Verificación Patrimonial</MudText>
+    </MudItem>
+</MudGrid>
+<MudGrid>
+    <MudItem xs="12" sm="6" md="4">
+        <MudPaper>
+            <MudTextField TextChanged="GetDeclaracion" @bind-Value="CURP" Label="CURP" Variant="Variant.Outlined" Immediate="true" MaxLength=18></MudTextField>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+<MudGrid>
+    <MudItem xs=6>
+        <MudPaper>
+            <MudText Typo=Typo.h5 Color="Color.Primary">Datos de la persona</MudText>
+            <MudText Typo=Typo.h6 Color="Color.Default">@nombre @primerApellido @segundoApellido</MudText>
+        </MudPaper>
+
+    </MudItem>
+</MudGrid>
+<MudGrid>
+    <MudItem xs="3">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudGrid>
+                <MudItem xs=12 Style="text-align:center">
+                    <MudText Typo=Typo.h6 Color="Color.Primary">Conflicto de intereses</MudText>
+                </MudItem>
+                <MudItem xs=12 Style="text-align:center">
+                    @if (conflictoIntereses)
+                    {
+                        color = Color.Warning;
+                        <MudText Typo=Typo.h3 Color="@color">Si</MudText>
+                    }
+                    else
+                    {
+                        color = Color.Success;
+                        <MudText Typo=Typo.h3 Color="@color">No</MudText>
+                    }
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="3">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudGrid>
+                <MudItem xs=12 Style="text-align:center">
+                    <MudText Typo=Typo.h6 Color="Color.Primary">Contrataciones</MudText>
+                </MudItem>
+                <MudItem xs=12 Style="text-align:center">
+                    @if (contrataciones)
+                    {
+                        color = Color.Warning;
+                        <MudText Typo=Typo.h3 Color="@color">Si</MudText>
+                    }
+                    else
+                    {
+                        color = Color.Success;
+                        <MudText Typo=Typo.h3 Color="@color">No</MudText>
+                    }
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="3">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudGrid>
+                <MudItem xs=12 Style="text-align:center">
+                    <MudText Typo=Typo.h6 Color="Color.Primary">Sancionado</MudText>
+                </MudItem>
+                <MudItem xs=12 Style="text-align:center">
+                    @if (sancionado)
+                    {
+                        color = Color.Error;
+                        <MudText Typo=Typo.h3 Color="@color">Si</MudText>
+                    }
+                    else
+                    {
+                        color = Color.Success;
+                        <MudText Typo=Typo.h3 Color="@color">No</MudText>
+                    }
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="3">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudGrid>
+                <MudItem xs=12 Style="text-align:center">
+                    <MudText Typo=Typo.h6 Color="Color.Primary">Nivel de riesgo</MudText>
+                </MudItem>
+                <MudItem xs=12 Style="text-align:center">
+                    @if (porcentajeRiesgo >= 90.0f && porcentajeRiesgo < 100.0f)
+                    {
+                        color = Color.Error;
+                        <MudText Typo=Typo.h3 Color="@color">@porcentajeRiesgo</MudText>
+                    }
+                    else if (porcentajeRiesgo > 60.0f && porcentajeRiesgo < 90.0f)
+                    {
+                        color = Color.Warning;
+                        <MudText Typo=Typo.h3 Color="@color">@porcentajeRiesgo</MudText>
+                    }
+                    else if (porcentajeRiesgo > 0.0f && porcentajeRiesgo < 60.0f)
+                    {
+                        color = Color.Success;
+                        <MudText Typo=Typo.h3 Color="@color">@porcentajeRiesgo</MudText>
+                    }
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+<MudGrid>
+    <MudItem xs=12 Style="text-align:center">
+        <MudGrid>
+            <MudItem xs=12 Style="text-align:center">
+                <MudPaper>
+                    <MudIcon Icon="@Icons.Material.Filled.House" Color="Color.Primary" Size="Size.Large" />
+                    <MudText Typo=Typo.h6 Color="Color.Primary">Bienes inmuebles</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs=4 Style="text-align:center">
+                <MudPaper Class="pa-16 ma-2" Elevation="3">
+                    <MudText Typo=Typo.h6 Color="Color.Warning">Revisar</MudText>
+                    <MudText Color="Color.Default">Terreno</MudText>
+                    <MudText Color="Color.Default">Cancún</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs=4 Style="text-align:center">
+                <MudPaper Class="pa-16 ma-2" Elevation="3">
+                    <MudText Typo=Typo.h6 Color="Color.Error">No declarado</MudText>
+                    <MudText Color="Color.Default">Casa</MudText>
+                    <MudText Color="Color.Default">Lomas d Santa Fé</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs=4 Style="text-align:center">
+                <MudPaper Class="pa-16 ma-2" Elevation="3">
+                    <MudText Typo=Typo.h6 Color="Color.Success">Revisado</MudText>
+                    <MudText Color="Color.Default">Departamento</MudText>
+                    <MudText Color="Color.Default">New York</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs=12 Style="text-align:center">
+                <MudPaper>
+                    <MudIcon Icon="@Icons.Material.Filled.DirectionsCar" Color="Color.Primary" Size="Size.Large" />
+                    <MudText Typo=Typo.h6 Color="Color.Primary">Vehículos</MudText>            
+                </MudPaper>
+            </MudItem>
+            <MudItem xs=4 Style="text-align:center">
+                <MudPaper Class="pa-16 ma-2" Elevation="3">
+                    <MudText Typo=Typo.h6 Color="Color.Warning">Revisar</MudText>
+                    <MudText Color="Color.Default">BMW</MudText>
+                    <MudText Color="Color.Default">M3</MudText>
+                    <MudText Color="Color.Default">2019</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs=4 Style="text-align:center">
+                <MudPaper Class="pa-16 ma-2" Elevation="3">
+                    <MudText Typo=Typo.h6 Color="Color.Error">No declarado</MudText>
+                    <MudText Color="Color.Default">VW</MudText>
+                    <MudText Color="Color.Default">Jetta</MudText>
+                    <MudText Color="Color.Default">2020</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs=4 Style="text-align:center">
+                <MudPaper Class="pa-16 ma-2" Elevation="3">
+                    <MudText Typo=Typo.h6 Color="Color.Success">Revisado</MudText>
+                    <MudText Color="Color.Default">Kia</MudText>
+                    <MudText Color="Color.Default">Stringer</MudText>
+                    <MudText Color="Color.Default">2020</MudText>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+</MudGrid>
+<MudGrid>
+    <MudItem xs=12 Style="text-align:center">
+        <MudPaper>
+            <MudChart ChartType="ChartType.Line" ChartSeries="@chartSeries" @bind-SelectedIndex="Index"  Width="100%" Height="350px"></MudChart>
+        </MudPaper>
+    </MudItem>
+    
+</MudGrid>
+
+@code {
+
+    private List<Declaracion> declaraciones;
+    private List<double> ingresos = new List<double>();
+    private List<int> inmuebles = new List<int>();
+    private string CURP;
+    private double[] grafica;
+    private string nombre;
+    private string primerApellido;
+    private string segundoApellido;
+
+    Random random = new Random();
+
+    private float porcentajeRiesgo;
+    private bool sancionado = true;
+    private bool contrataciones = true;
+    private bool conflictoIntereses = true;
+    List<ChartSeries> chartSeries = new List<ChartSeries>();
+    ChartSeries series = new ChartSeries();
+
+    private Color color = new Color();
+
+    private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+
+    public async Task GetDeclaracion(String args)
+    {
+        if (CURP.Count() == 18)
+        {
+            CURP = CURP.ToUpper();
+            var httpResponse = await repository.Get<List<Item>>($"https://datatonapi.azurewebsites.net/api/declaraciones/lista?curp={CURP}");
+            var lista = httpResponse.Response;
+            foreach (var item in lista)
+            {
+                var resultado = await http.GetAsync($"https://datatonapi.azurewebsites.net/api/declaraciones/declaracion?id={item.Id}");
+                var json = resultado.Content.ReadAsStringAsync().Result;
+                json = json.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
+                dynamic obj = JObject.Parse(json);
+                try
+                {
+                    var valor = obj.declaracion.situacionPatrimonial.ingresos.totalIngresosAnualesNetos.valor;
+                    object objValor = valor.Value;
+                    string strValor = objValor.ToString();
+                    ingresos.Add(double.Parse(strValor));
+
+                    var nombreValor = obj.declaracion.situacionPatrimonial.datosGenerales.nombre;
+                    object objNombre = nombreValor.Value;
+                    nombre = objNombre.ToString();
+
+                    var pApellidoValor = obj.declaracion.situacionPatrimonial.datosGenerales.primerApellido;
+                    object objPApellido = pApellidoValor.Value;
+                    primerApellido = objPApellido.ToString();
+
+                    var sApellidoValor = obj.declaracion.situacionPatrimonial.datosGenerales.segundoApellido;
+                    object objSApellido = sApellidoValor.Value;
+                    segundoApellido = objSApellido.ToString();
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            porcentajeRiesgo = random.Next(10, 100);
+            if(porcentajeRiesgo <= 50)
+            {
+                sancionado = false;
+                contrataciones = true;
+            }
+            else
+            {
+                sancionado = true;
+                contrataciones = false;
+            }
+            grafica = ingresos.ToArray();
+            series.Name = "Ingresos";
+            series.Data = grafica;
+            chartSeries.Add(series);
+        }
+    }
+}
+
+
