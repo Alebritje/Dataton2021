@@ -16,6 +16,7 @@ namespace DatatonAPI
 {
     public class Startup
     {
+        private readonly string _cors = "Cors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,9 +27,21 @@ namespace DatatonAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: _cors,
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin();
+                                  });
+            });
+
+
             services.AddControllers();
             services.AddMvc().AddNewtonsoftJson();
             services.AddSingleton<ICosmosDbService>(InitializeCosmosClientInstanceAsync(Configuration.GetSection("CosmosDb")).GetAwaiter().GetResult());
+        
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +55,8 @@ namespace DatatonAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(_cors);
 
             app.UseAuthorization();
 

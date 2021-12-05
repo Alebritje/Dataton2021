@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatatonAPI", "DatatonAPI\DatatonAPI.csproj", "{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatatonWASM", "D:\DatatonWASM\DatatonWASM\DatatonWASM\DatatonWASM.csproj", "{82100057-BEA9-462C-808D-5624750F8BC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C364FD0-5A4D-49B1-829F-11C2F4E4CFFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82100057-BEA9-462C-808D-5624750F8BC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82100057-BEA9-462C-808D-5624750F8BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82100057-BEA9-462C-808D-5624750F8BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82100057-BEA9-462C-808D-5624750F8BC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
